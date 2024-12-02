@@ -18,6 +18,9 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
 
-    @Transient
+    @Column(name = "phone_number")
+    private String phoneNo;
+
+    @OneToMany(mappedBy = "comment", cascade = CascadeType.ALL)
     private List<Comment> comments;
 }
