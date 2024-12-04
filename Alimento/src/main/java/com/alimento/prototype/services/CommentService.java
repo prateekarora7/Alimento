@@ -1,4 +1,9 @@
 package com.alimento.prototype.services;
 
-interface CommentService {
+import com.alimento.prototype.entities.Comment;
+
+public interface CommentService {
+
+    void saveComment(String comment, int blogId, int userId);
+
 }

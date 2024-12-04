@@ -2,9 +2,12 @@ package com.alimento.prototype.repositories;
 
 import com.alimento.prototype.entities.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-interface CommentRepository extends JpaRepository {
+@Repository
+public interface CommentRepository extends JpaRepository<Comment, Integer> {
 
+    //Abstract method to save a newly posted comment
     void saveComment(Comment comment);
 
 }

@@ -1,12 +1,18 @@
 package com.alimento.prototype.entities;
 
 import jakarta.persistence.*;
-import lombok.NonNull;
+import lombok.*;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "comment")
 public class Comment {
 
+    @Id
     @Column(name = "comment_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int commentId;

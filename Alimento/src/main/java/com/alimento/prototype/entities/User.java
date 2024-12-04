@@ -12,6 +12,10 @@ public class User {
     @Column(name = "email")
     private String email;
 
+    @Column(name = "userId")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int userId;
+
     @Column(name = "first_name")
     private String firstName;
 
