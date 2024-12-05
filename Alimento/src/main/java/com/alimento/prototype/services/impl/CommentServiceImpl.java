@@ -3,6 +3,7 @@ package com.alimento.prototype.services.impl;
 import com.alimento.prototype.dtos.CommentDTO;
 import com.alimento.prototype.entities.Comment;
 import com.alimento.prototype.entities.User;
+import com.alimento.prototype.exceptions.UserIdNotFoundException;
 import com.alimento.prototype.repositories.CommentRepository;
 import com.alimento.prototype.repositories.UserRepository;
 import com.alimento.prototype.services.CommentService;
@@ -30,7 +31,8 @@ public class CommentServiceImpl implements CommentService {
     public void saveComment(CommentDTO commentDTO) {
 
         //Extracting the user using user Id
-        User user = userRepository.getUserByUserId(commentDTO.getUserId());
+        User user = userRepository.getUserByUserId(commentDTO.getUserId())
+                .orElseThrow(() -> new UserIdNotFoundException("User not found for user id : "+ commentDTO.getUserId()));
 
         //Building our comment
         Comment comment = Comment.builder()
@@ -41,5 +43,18 @@ public class CommentServiceImpl implements CommentService {
 
         //Passing our built comment to comment repository for saving
         commentRepository.saveComment(comment);
+    }
+
+    //Method to delete comment using comment Id
+    @Override
+    public boolean deleteComment(int commentId){
+        commentRepository.deleteComment(commentId);
+
+        //Validating if the deletion of comment is successful or not
+        if(commentRepository.getCommentById(commentId) == null){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

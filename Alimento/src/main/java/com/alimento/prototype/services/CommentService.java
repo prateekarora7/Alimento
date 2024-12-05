@@ -7,4 +7,5 @@ public interface CommentService {
 
     void saveComment(CommentDTO commentDTO);
 
+    boolean deleteComment(int commentId);
 }
