@@ -1,5 +1,6 @@
 package com.alimento.prototype.services.impl;
 
+import com.alimento.prototype.dtos.CommentDTO;
 import com.alimento.prototype.entities.Comment;
 import com.alimento.prototype.entities.User;
 import com.alimento.prototype.repositories.CommentRepository;
@@ -26,15 +27,15 @@ public class CommentServiceImpl implements CommentService {
 
 
     @Override
-    public void saveComment(String commentContent, int blogId, int userId) {
+    public void saveComment(CommentDTO commentDTO) {
 
         //Extracting the user using user Id
-        User user = userRepository.getUserByUserId(userId);
+        User user = userRepository.getUserByUserId(commentDTO.getUserId());
 
         //Building our comment
         Comment comment = Comment.builder()
-                            .comment(commentContent)
-                            .blogId(blogId)
+                            .comment(commentDTO.getCommentContent())
+                            .blogId(commentDTO.getBlogId())
                             .user(user)
                             .build();
 

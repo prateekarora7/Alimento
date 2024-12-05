@@ -2,6 +2,7 @@ package com.alimento.prototype.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.antlr.v4.runtime.misc.NotNull;
 
 @Getter
 @Setter
