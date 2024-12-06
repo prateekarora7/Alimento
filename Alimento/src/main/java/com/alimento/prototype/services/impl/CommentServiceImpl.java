@@ -34,15 +34,8 @@ public class CommentServiceImpl implements CommentService {
         User user = userRepository.getUserByUserId(commentDTO.getUserId())
                 .orElseThrow(() -> new UserIdNotFoundException("User not found for user id : "+ commentDTO.getUserId()));
 
-        //Building our comment
-        Comment comment = Comment.builder()
-                            .comment(commentDTO.getCommentContent())
-                            .blogId(commentDTO.getBlogId())
-                            .user(user)
-                            .build();
-
         //Passing our built comment to comment repository for saving
-        commentRepository.saveComment(comment);
+        commentRepository.saveComment(commentDTO.getCommentContent(), commentDTO.getBlogId(), commentDTO.getUserId());
     }
 
     //Method to delete comment using comment Id

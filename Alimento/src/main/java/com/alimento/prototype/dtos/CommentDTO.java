@@ -9,6 +9,6 @@ public class CommentDTO {
 
     private int blogId;
 
-    private int userId;
+    private String userId;
 
 }

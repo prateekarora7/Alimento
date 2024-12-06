@@ -31,3 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### properties file ###
+*.properties
+
+### YML properties file ###
+application.yaml

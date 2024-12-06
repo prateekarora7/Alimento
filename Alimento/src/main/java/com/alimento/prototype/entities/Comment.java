@@ -19,8 +19,8 @@ public class Comment {
     private int commentId;
 
     @NonNull
-    @Column(name = "comment", nullable = false)
-    private String comment;
+    @Column(name = "comment_content", nullable = false)
+    private String commentContent;
 
     @NonNull
     @Column(name = "blog_id", nullable = false)

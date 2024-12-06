@@ -1,20 +1,30 @@
 package com.alimento.prototype.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "user")
+@Table(name = "user", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "email")
+})
 public class User {
 
-    @Id
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
 
-    @Column(name = "userId")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int userId;
+    @Column(name = "password")
+    private String password;
+
+    @Id
+    @Column(name = "user_id")
+    private String userId;
 
     @Column(name = "first_name")
     private String firstName;
@@ -25,6 +35,6 @@ public class User {
     @Column(name = "phone_number")
     private String phoneNo;
 
-    @OneToMany(mappedBy = "comment", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "commentId", cascade = CascadeType.ALL)
     private List<Comment> comments;
 }
