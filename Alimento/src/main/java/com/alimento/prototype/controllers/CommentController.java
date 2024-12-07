@@ -1,10 +1,13 @@
 package com.alimento.prototype.controllers;
 
 import com.alimento.prototype.dtos.CommentDTO;
+import com.alimento.prototype.entities.Comment;
 import com.alimento.prototype.services.CommentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/comment")
@@ -24,9 +27,17 @@ public class CommentController {
         commentService.saveComment(commentDTO);
     }
 
+    @GetMapping("/id/{userId}")
+    public ResponseEntity<List<Comment>> getCommentsByUserId(@PathVariable String userId){
+        return new ResponseEntity<>(commentService.getCommentsByUserId(userId), HttpStatus.OK);
+    }
 
-    //This Delete method is deleting the comment using the comment Id
-    //If method returns Ok, then the request was successful. If it return Internal server error, then the request was not successful.
+    @GetMapping
+    public ResponseEntity<List<Comment>> getCommentByBlogId(@PathVariable int blogId){
+        return new ResponseEntity<>(commentService.getCommentsByBlogId(blogId), HttpStatus.OK);
+    }
+    //This delete method is removing the comment using the comment Id
+    //If method returns Ok, then the request was successful. If it returns Internal server error, then the request was not successful.
     @DeleteMapping("/delete")
     public ResponseEntity<Void> deleteComment(@RequestBody int commentId){
         boolean response = commentService.deleteComment(commentId);
@@ -34,5 +45,6 @@ public class CommentController {
         if(response == true) return new ResponseEntity<>(HttpStatus.OK);
         else return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
 
 }

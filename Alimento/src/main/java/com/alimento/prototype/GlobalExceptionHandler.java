@@ -1,6 +1,7 @@
 package com.alimento.prototype;
 
 import com.alimento.prototype.exceptions.CommentIdNotFoundException;
+import com.alimento.prototype.exceptions.NoCommentsFoundException;
 import com.alimento.prototype.exceptions.UserAlreadyExistsException;
 import com.alimento.prototype.exceptions.UserIdNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -50,5 +51,17 @@ public class GlobalExceptionHandler {
         error.put("Status Code", String.valueOf(HttpStatus.CONFLICT));
 
         return new ResponseEntity<>(error, HttpStatus.CONFLICT);
+    }
+
+    //This is handling exception when there are no comments associated for a user Id or Blog Id
+    @ExceptionHandler(NoCommentsFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<Map<String, String>> handleNoCommentsFoundException(String message){
+        Map<String, String> error = new HashMap<>();
+
+        error.put("message", message);
+        error.put("Status Code", String.valueOf(HttpStatus.NOT_FOUND));
+
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 }

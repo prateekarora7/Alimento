@@ -33,7 +33,9 @@ build/
 .vscode/
 
 ### properties file ###
-*.properties
+src/main/resources/application.properties
+
 
 ### YML properties file ###
-application.yaml
+src/main/resources/application.yaml
+

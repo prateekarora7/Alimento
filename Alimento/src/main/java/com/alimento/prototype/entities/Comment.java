@@ -1,8 +1,11 @@
 package com.alimento.prototype.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.antlr.v4.runtime.misc.NotNull;
+
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -28,5 +31,9 @@ public class Comment {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonBackReference
     private User user;
+
+    @Column(name = "comment_date")
+    private LocalDate commentDate;
 }

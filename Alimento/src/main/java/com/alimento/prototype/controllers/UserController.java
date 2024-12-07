@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -17,8 +19,16 @@ public class UserController {
     }
 
     @PostMapping("/save")
-    public void saveUser(@RequestBody User user){
+    public ResponseEntity saveUser(@RequestBody User user){
         userService.saveUser(user);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/email/{email}")
+    public ResponseEntity<User> getUserByEmail(@PathVariable String email){
+        User user = userService.getUserByEmail(email);
+        //if(user == null) return new ResponseEntity<>(user, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
 }

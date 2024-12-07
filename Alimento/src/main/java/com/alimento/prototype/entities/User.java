@@ -1,10 +1,12 @@
 package com.alimento.prototype.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -35,6 +37,10 @@ public class User {
     @Column(name = "phone_number")
     private String phoneNo;
 
-    @OneToMany(mappedBy = "commentId", cascade = CascadeType.ALL)
+    @Column(name = "created_at")
+    private LocalDateTime createAt;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Comment> comments;
 }
