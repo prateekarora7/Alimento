@@ -1,5 +1,6 @@
 package com.alimento.prototype.entities;
 
+import com.alimento.prototype.entities.blogs.BlogPost;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -25,9 +26,10 @@ public class Comment {
     @Column(name = "comment_content", nullable = false)
     private String commentContent;
 
-    @NonNull
-    @Column(name = "blog_id", nullable = false)
-    private int blogId;
+    @ManyToOne
+    @JoinColumn(name = "blogId", nullable = false)
+    @JsonBackReference
+    private BlogPost blogPost;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)

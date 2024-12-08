@@ -1,8 +1,14 @@
 package com.alimento.prototype.entities.blogs;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ContentBlock {
 
     @Id
@@ -17,6 +23,5 @@ public class ContentBlock {
 
     private String url; // For images or external embeds
 
-    // Getters and setters...
 }
 

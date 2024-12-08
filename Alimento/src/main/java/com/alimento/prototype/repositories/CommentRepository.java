@@ -18,7 +18,7 @@ public interface CommentRepository extends JpaRepository<Comment, Integer> {
     @Transactional
     @Modifying
     @Query(value = "INSERT INTO comment (comment_content, blog_id, user_id, comment_date) VALUES (:commentContent, :blogId, :userId, :commentDate)", nativeQuery = true)
-    void saveComment(@Param("commentContent") String commentContent, @Param("blogId") int blogId, @Param("userId") String userId, @Param("localDate") LocalDate commentDate);
+    void saveComment(@Param("commentContent") String commentContent, @Param("blogId") int blogId, @Param("userId") String userId, @Param("commentDate") LocalDate commentDate);
 
     //Abstract method to delete the comment using comment id
     @Query(value = "DELETE FROM comment WHERE id = :commentId", nativeQuery = true)
