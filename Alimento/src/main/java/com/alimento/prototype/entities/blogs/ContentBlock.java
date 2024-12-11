@@ -9,14 +9,19 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "content_block")
 public class ContentBlock {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "block_type")
     @Enumerated(EnumType.STRING)
-    private BlockType type;
+    private BlockType blockType;
+
+    @Column(name = "block_order")
+    private int blockOrder;
 
     @Column(columnDefinition = "TEXT")
     private String content; // Text content or embed code
