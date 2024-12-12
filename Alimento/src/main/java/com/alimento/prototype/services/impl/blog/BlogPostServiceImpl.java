@@ -22,20 +22,22 @@ public class BlogPostServiceImpl implements BlogPostService {
     @Override
     public long saveBlogPostDTO(BlogPostDTO blogPostDTO) {
 
+        String formattedTags = String.join(", ", blogPostDTO.getTags());
         //Building the blog post without the content blocks and using the blog post DTO
         BlogPost blogPost = BlogPost.builder()
                 .title(blogPostDTO.getTitle())
                 .authorName(blogPostDTO.getAuthorName())
                 .createdAt(LocalDateTime.now())
-                .tags(blogPostDTO.getTags())
+                .tags(formattedTags)
                 .build();
-
         blogPostRepository.saveBlogPostDTO(blogPost.getTitle(),blogPost.getAuthorName(), blogPost.getCreatedAt(), blogPost.getTags());   // saving the blogDTO in a blog to generate an Blog Id
 
         Long blogId = blogPost.getBlogId();
 
         //Checking if the blog id variable is populated or not and throwing exception accordingly
         if(blogId == null) throw new RuntimeException("Facing issues, Blog not saved!!!");
+
+
 
         return blogId;
     }

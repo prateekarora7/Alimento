@@ -41,8 +41,7 @@ public class BlogPost {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @ElementCollection
     @Column(name = "tags")
-    private List<String> tags;
+    private String tags;
 
 }
