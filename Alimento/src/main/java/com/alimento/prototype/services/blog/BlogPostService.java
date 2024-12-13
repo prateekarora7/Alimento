@@ -13,4 +13,5 @@ public interface BlogPostService {
 
     BlogPost getBlogPostbyId(long blogId);
 
+    BlogPost getBlogPostBySlug(String slug);
 }

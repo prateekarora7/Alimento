@@ -20,6 +20,9 @@ public class BlogPost {
     @Column(name = "blog_id")
     private long blogId;
 
+    @Column(name = "slug", unique = true)
+    private String slug;
+
     @NonNull
     @Column(name = "title" ,nullable = false)
     private String title;

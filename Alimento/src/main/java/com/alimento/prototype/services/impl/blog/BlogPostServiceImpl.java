@@ -6,6 +6,7 @@ import com.alimento.prototype.entities.blogs.ContentBlock;
 import com.alimento.prototype.repositories.blog.BlogPostRepository;
 import com.alimento.prototype.repositories.blog.ContentBlockRepository;
 import com.alimento.prototype.services.blog.BlogPostService;
+import com.alimento.prototype.utils.SlugUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,10 +32,13 @@ public class BlogPostServiceImpl implements BlogPostService {
 
         String formattedTags = String.join(", ", blogPostDTO.getTags());
 
+        String formattedSlug = SlugUtil.toSlug(blogPostDTO.getSlug());
+
         //Building the blog post without the content blocks and using the blog post DTO
         BlogPost blogPost = BlogPost.builder()
                 .title(blogPostDTO.getTitle())
                 .authorName(blogPostDTO.getAuthorName())
+                .slug(formattedSlug)
                 .createdAt(LocalDateTime.now())
                 .tags(formattedTags)
                 .blocks(blogPostDTO.getContentBlocks())
@@ -47,6 +51,11 @@ public class BlogPostServiceImpl implements BlogPostService {
     @Override
     public BlogPost getBlogPostbyId(long blogId) {
         return blogPostRepository.getBlogPostByBlogId(blogId);
+    }
+
+    @Override
+    public BlogPost getBlogPostBySlug(String slug) {
+        return blogPostRepository.getBlogPostBySlug(slug);
     }
 
 }

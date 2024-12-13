@@ -22,13 +22,11 @@ public interface BlogPostRepository extends JpaRepository<BlogPost, Long> {
             "VALUES (:title, :authorName, :createdAt, :tags)", nativeQuery = true)
     void saveBlogPostDTO(@Param("title") String title, @Param("authorName") String authorName, @Param("createdAt") LocalDateTime createdAt, @Param("tags") String tags);
 
-//    @Modifying
-//    @Transactional
-//    @Query(value = "INSERT INTO blog_post (title, author_name, blocks, created_at, tags) " +
-//            "VALUES (:title, :authorName, :blocks, :createdAt, :tags)", nativeQuery = true)
-//    void saveBlogPost(@Param("title") String title, @Param("authorName") String authorName, @Param("blocks") List<ContentBlock> blocks, @Param("createdAt") LocalDateTime createdAt, @Param("tags") String tags);
 
     @Query(value = "SELECT * FROM blog_post WHERE blog_id = :blogId", nativeQuery = true)
     BlogPost getBlogPostByBlogId(@Param("blogId") long blogId);
+
+    @Query(value = "SELECT * FROM blog_post WHERE slug = :slug", nativeQuery = true)
+    BlogPost getBlogPostBySlug(@Param("slug") String slug);
 
 }

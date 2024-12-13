@@ -15,6 +15,8 @@ public class BlogPostDTO {
 
     private String authorName;
 
+    private String slug;
+
     private LocalDateTime createdAt;
 
     private List<String> tags;

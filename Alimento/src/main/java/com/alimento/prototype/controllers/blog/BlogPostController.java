@@ -32,4 +32,9 @@ public class BlogPostController {
         return new ResponseEntity<>(blogPostService.getBlogPostbyId(blogId), HttpStatus.OK);
     }
 
+    @GetMapping("/{slug}")
+    public ResponseEntity<BlogPost> getBlogPostBySlug(@PathVariable String slug){
+        return new ResponseEntity<>(blogPostService.getBlogPostBySlug(slug), HttpStatus.OK);
+    }
+
 }
