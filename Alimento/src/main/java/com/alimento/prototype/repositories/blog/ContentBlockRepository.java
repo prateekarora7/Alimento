@@ -14,8 +14,10 @@ public interface ContentBlockRepository extends JpaRepository<ContentBlock, Long
 
     @Transactional
     @Modifying
-    @Query(value = "INSERT INTO content_block (block_type, block_order, content, url)" +
-            "VALUES (:blockType, :blockOrder, :content, :url)", nativeQuery = true)
-    void saveContentBlock(@Param("blockType") BlockType blockType, @Param("blockOrder") int blockOrder, @Param("content") String content, @Param("url") String url);
+    @Query(value = "INSERT INTO content_block (block_type, blog_id, block_order, content, url)" +
+            "VALUES (:blockType, :blogId, :blockOrder, :content, :url)", nativeQuery = true)
+    void saveContentBlock(@Param("blockType") BlockType blockType, @Param("blogId") long blogId, @Param("blockOrder") int blockOrder, @Param("content") String content, @Param("url") String url);
+
+
 
 }

@@ -20,13 +20,7 @@ public class ContentBlockServiceImpl implements ContentBlockService {
     public void saveContentBlocks(List<ContentBlock> contentBlocks) {
 
         // This loop is setting block order. Blocks will be arranged according to this order when fetched by frontend
-        for (int i = 0; i < contentBlocks.size(); i++) {
-            contentBlocks.get(i).setBlockOrder(i+1);
 
-            contentBlockRepository.saveContentBlock(contentBlocks.get(i).getBlockType(), contentBlocks.get(i).getBlockOrder(),
-                                                        contentBlocks.get(i).getContent(), contentBlocks.get(i).getUrl());
-
-        }
     }
 
 }

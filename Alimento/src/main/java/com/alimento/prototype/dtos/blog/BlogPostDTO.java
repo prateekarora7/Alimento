@@ -1,5 +1,6 @@
 package com.alimento.prototype.dtos.blog;
 
+import com.alimento.prototype.entities.blogs.ContentBlock;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -17,5 +18,7 @@ public class BlogPostDTO {
     private LocalDateTime createdAt;
 
     private List<String> tags;
+
+    private List<ContentBlock> contentBlocks;
 
 }
