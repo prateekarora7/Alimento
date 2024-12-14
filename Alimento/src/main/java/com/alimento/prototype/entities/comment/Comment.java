@@ -1,10 +1,10 @@
-package com.alimento.prototype.entities;
+package com.alimento.prototype.entities.comment;
 
 import com.alimento.prototype.entities.blogs.BlogPost;
+import com.alimento.prototype.entities.user.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
-import org.antlr.v4.runtime.misc.NotNull;
 
 import java.time.LocalDate;
 

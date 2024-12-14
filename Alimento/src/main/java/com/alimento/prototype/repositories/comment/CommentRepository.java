@@ -1,6 +1,6 @@
-package com.alimento.prototype.repositories;
+package com.alimento.prototype.repositories.comment;
 
-import com.alimento.prototype.entities.Comment;
+import com.alimento.prototype.entities.comment.Comment;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

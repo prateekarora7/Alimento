@@ -1,8 +1,8 @@
-package com.alimento.prototype.controllers;
+package com.alimento.prototype.controllers.comment;
 
-import com.alimento.prototype.dtos.CommentDTO;
-import com.alimento.prototype.entities.Comment;
-import com.alimento.prototype.services.CommentService;
+import com.alimento.prototype.dtos.comment.CommentDTO;
+import com.alimento.prototype.entities.comment.Comment;
+import com.alimento.prototype.services.comment.CommentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

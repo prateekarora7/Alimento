@@ -1,16 +1,13 @@
-package com.alimento.prototype.services.impl;
+package com.alimento.prototype.services.implementation.user;
 
-import com.alimento.prototype.entities.Comment;
-import com.alimento.prototype.entities.User;
+import com.alimento.prototype.entities.user.User;
 import com.alimento.prototype.exceptions.UserAlreadyExistsException;
 import com.alimento.prototype.exceptions.UserIdNotFoundException;
-import com.alimento.prototype.repositories.UserRepository;
-import com.alimento.prototype.services.UserService;
+import com.alimento.prototype.repositories.user.UserRepository;
+import com.alimento.prototype.services.user.UserService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {

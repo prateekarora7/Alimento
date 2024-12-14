@@ -1,6 +1,6 @@
-package com.alimento.prototype.repositories;
+package com.alimento.prototype.repositories.user;
 
-import com.alimento.prototype.entities.User;
+import com.alimento.prototype.entities.user.User;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

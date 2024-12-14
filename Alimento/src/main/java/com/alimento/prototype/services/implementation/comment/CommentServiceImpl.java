@@ -1,17 +1,16 @@
-package com.alimento.prototype.services.impl;
+package com.alimento.prototype.services.implementation.comment;
 
-import com.alimento.prototype.dtos.CommentDTO;
-import com.alimento.prototype.entities.Comment;
-import com.alimento.prototype.entities.User;
+import com.alimento.prototype.dtos.comment.CommentDTO;
+import com.alimento.prototype.entities.comment.Comment;
+import com.alimento.prototype.entities.user.User;
 import com.alimento.prototype.exceptions.NoCommentsFoundException;
 import com.alimento.prototype.exceptions.UserIdNotFoundException;
-import com.alimento.prototype.repositories.CommentRepository;
-import com.alimento.prototype.repositories.UserRepository;
-import com.alimento.prototype.services.CommentService;
+import com.alimento.prototype.repositories.comment.CommentRepository;
+import com.alimento.prototype.repositories.user.UserRepository;
+import com.alimento.prototype.services.comment.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.net.ConnectException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;

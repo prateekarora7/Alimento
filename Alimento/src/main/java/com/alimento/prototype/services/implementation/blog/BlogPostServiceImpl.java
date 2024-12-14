@@ -1,8 +1,7 @@
-package com.alimento.prototype.services.impl.blog;
+package com.alimento.prototype.services.implementation.blog;
 
 import com.alimento.prototype.dtos.blog.BlogPostDTO;
 import com.alimento.prototype.entities.blogs.BlogPost;
-import com.alimento.prototype.entities.blogs.ContentBlock;
 import com.alimento.prototype.repositories.blog.BlogPostRepository;
 import com.alimento.prototype.repositories.blog.ContentBlockRepository;
 import com.alimento.prototype.services.blog.BlogPostService;
@@ -11,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Service
 public class BlogPostServiceImpl implements BlogPostService {
@@ -20,11 +18,11 @@ public class BlogPostServiceImpl implements BlogPostService {
     private final BlogPostRepository blogPostRepository;
 
     @Autowired
-    private final ContentBlockRepository contentBlockRepository;
+    private final SlugUtil slugUtil;
 
-    public BlogPostServiceImpl(BlogPostRepository blogPostRepository, ContentBlockRepository contentBlockRepository) {
+    public BlogPostServiceImpl(BlogPostRepository blogPostRepository, ContentBlockRepository contentBlockRepository, SlugUtil slugUtil) {
         this.blogPostRepository = blogPostRepository;
-        this.contentBlockRepository = contentBlockRepository;
+        this.slugUtil = slugUtil;
     }
 
     @Override
@@ -32,7 +30,8 @@ public class BlogPostServiceImpl implements BlogPostService {
 
         String formattedTags = String.join(", ", blogPostDTO.getTags());
 
-        String formattedSlug = SlugUtil.toSlug(blogPostDTO.getSlug());
+        String formattedSlug = slugUtil.toSlug(blogPostDTO.getSlug());
+
 
         //Building the blog post without the content blocks and using the blog post DTO
         BlogPost blogPost = BlogPost.builder()

@@ -1,4 +1,4 @@
-package com.alimento.prototype.dtos;
+package com.alimento.prototype.dtos.comment;
 
 import lombok.Data;
 

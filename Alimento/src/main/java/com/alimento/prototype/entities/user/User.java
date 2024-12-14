@@ -1,5 +1,6 @@
-package com.alimento.prototype.entities;
+package com.alimento.prototype.entities.user;
 
+import com.alimento.prototype.entities.comment.Comment;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

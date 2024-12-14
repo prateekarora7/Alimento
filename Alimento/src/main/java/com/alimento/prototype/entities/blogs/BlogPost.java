@@ -1,6 +1,6 @@
 package com.alimento.prototype.entities.blogs;
 
-import com.alimento.prototype.entities.Comment;
+import com.alimento.prototype.entities.comment.Comment;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;

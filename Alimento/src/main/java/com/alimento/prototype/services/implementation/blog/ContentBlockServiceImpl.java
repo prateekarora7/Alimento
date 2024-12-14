@@ -1,4 +1,4 @@
-package com.alimento.prototype.services.impl.blog;
+package com.alimento.prototype.services.implementation.blog;
 
 import com.alimento.prototype.entities.blogs.ContentBlock;
 import com.alimento.prototype.repositories.blog.ContentBlockRepository;
