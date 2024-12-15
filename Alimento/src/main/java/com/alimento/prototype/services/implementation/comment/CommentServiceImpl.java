@@ -4,7 +4,7 @@ import com.alimento.prototype.dtos.comment.CommentDTO;
 import com.alimento.prototype.entities.comment.Comment;
 import com.alimento.prototype.entities.user.User;
 import com.alimento.prototype.exceptions.NoCommentsFoundException;
-import com.alimento.prototype.exceptions.UserIdNotFoundException;
+import com.alimento.prototype.exceptions.UsernameNotFoundException;
 import com.alimento.prototype.repositories.comment.CommentRepository;
 import com.alimento.prototype.repositories.user.UserRepository;
 import com.alimento.prototype.services.comment.CommentService;
@@ -36,34 +36,42 @@ public class CommentServiceImpl implements CommentService {
     public void saveComment(CommentDTO commentDTO) {
 
         //Extracting the user using user Id
-        User user = userRepository.getUserByUserId(commentDTO.getUserId())
-                .orElseThrow(() -> new UserIdNotFoundException("User not found for user id : "+ commentDTO.getUserId()));
+        User user = userRepository.getUserByUsername(commentDTO.getUserId())
+                .orElseThrow(() -> new UsernameNotFoundException("User not found for user id : "+ commentDTO.getUserId()));
 
         //Passing our built comment to comment repository for saving
         commentRepository.saveComment(commentDTO.getCommentContent(), commentDTO.getBlogId(), commentDTO.getUserId(), LocalDate.now());
     }
 
+    @Override
+    public Comment getCommentByCommentId(long commentId){
+        return commentRepository.getCommentByCommentId(commentId);
+    }
+
+    @Override
+    public List<Comment> getCommentsByBlogIdAndUsername(int blogId, String username) {
+        return commentRepository.getCommentsByBlogIdAndUsername(blogId, username);
+    }
+
     //Method to delete comment using comment Id
     @Override
-    public boolean deleteComment(int commentId){
+    public void deleteComment(long commentId){
         commentRepository.deleteComment(commentId);
 
-        //Validating if the deletion of comment is successful or not
-        if(commentRepository.getCommentById(commentId) == null){
-            return true;
-        }else{
-            return false;
+        //Throwing run time exception if resource deletion was not succesful
+        if(!(commentRepository.getCommentByCommentId(commentId) == null)){
+            throw new RuntimeException("Resource deletion was unseccesful");
         }
     }
 
     //Method to get comments by a user using userId
     @Override
-    public List<Comment> getCommentsByUserId(String userId) {
-        List<Comment> comments = commentRepository.getCommentsByUserId(userId);
+    public List<Comment> getCommentsByUserId(String username) {
+        List<Comment> comments = commentRepository.getCommentsByUsername(username);
 
         //Checking if there are no comments associated with the User Id then we will throw an exception
         if(comments.size() == 0){
-            Optional<User> user = userRepository.getUserByUserId(userId);
+            Optional<User> user = userRepository.getUserByUsername(username);
             throw new NoCommentsFoundException("No comments found for this user : " + user.get().getEmail());
         }
         // else we will return comments as a list
@@ -79,6 +87,12 @@ public class CommentServiceImpl implements CommentService {
             //No comments found exception will be thrown
         }
         return comments;
+    }
+
+    @Override
+    public Comment updateComment(long commentId, String commentContent) {
+        commentRepository.updateComment(commentId, commentContent);
+        return commentRepository.getCommentByCommentId(commentId);
     }
 
 }

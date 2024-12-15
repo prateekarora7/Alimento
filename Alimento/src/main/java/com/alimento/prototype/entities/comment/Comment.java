@@ -20,7 +20,7 @@ public class Comment {
     @Id
     @Column(name = "comment_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int commentId;
+    private long commentId;
 
     @NonNull
     @Column(name = "comment_content", nullable = false)
@@ -28,12 +28,12 @@ public class Comment {
 
     @ManyToOne
     @JoinColumn(name = "blogId", nullable = false)
-    @JsonBackReference
+    @JsonBackReference("blog-comment")
     private BlogPost blogPost;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    @JsonBackReference
+    @JoinColumn(name = "username", nullable = false)
+    @JsonBackReference("user-comments")
     private User user;
 
     @Column(name = "comment_date")

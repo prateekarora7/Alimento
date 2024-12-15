@@ -1,9 +1,6 @@
 package com.alimento.prototype;
 
-import com.alimento.prototype.exceptions.CommentIdNotFoundException;
-import com.alimento.prototype.exceptions.NoCommentsFoundException;
-import com.alimento.prototype.exceptions.UserAlreadyExistsException;
-import com.alimento.prototype.exceptions.UserIdNotFoundException;
+import com.alimento.prototype.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -18,7 +15,7 @@ public class GlobalExceptionHandler {
 
 
     //This is handling exception for user not found for given user id
-    @ExceptionHandler(UserIdNotFoundException.class)
+    @ExceptionHandler({UsernameNotFoundException.class, EmailNotFoundException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND) // Set the response status
     public ResponseEntity<Map<String, String>> handleUserNotFoundException(String message){
         Map<String, String> error = new HashMap<>();

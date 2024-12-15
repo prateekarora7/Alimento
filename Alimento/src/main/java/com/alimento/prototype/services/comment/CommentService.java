@@ -9,9 +9,15 @@ public interface CommentService {
 
     void saveComment(CommentDTO commentDTO);
 
-    boolean deleteComment(int commentId);
+    Comment getCommentByCommentId(long commentId);
+
+    List<Comment> getCommentsByBlogIdAndUsername(int blogId, String username);
+
+    void deleteComment(long commentId);
 
     List<Comment> getCommentsByUserId(String userId);
 
     List<Comment> getCommentsByBlogId(int blogId);
+
+    Comment updateComment(long commentId, String commentContent);
 }

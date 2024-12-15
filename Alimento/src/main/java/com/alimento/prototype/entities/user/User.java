@@ -26,8 +26,8 @@ public class User {
     private String password;
 
     @Id
-    @Column(name = "user_id")
-    private String userId;
+    @Column(name = "username")
+    private String username;
 
     @Column(name = "first_name")
     private String firstName;
@@ -42,6 +42,6 @@ public class User {
     private LocalDateTime createAt;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @JsonManagedReference("user-comments")
     private List<Comment> comments;
 }

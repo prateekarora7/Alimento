@@ -35,7 +35,7 @@ public class BlogPost {
     private List<ContentBlock> blocks;
 
     @OneToMany(mappedBy = "blogPost", cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @JsonManagedReference("blog-comment")
     private List<Comment> comments;
 
     @Column(name = "created_at")
