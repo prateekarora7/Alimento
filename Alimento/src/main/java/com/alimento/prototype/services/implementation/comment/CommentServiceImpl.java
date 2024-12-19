@@ -36,11 +36,11 @@ public class CommentServiceImpl implements CommentService {
     public void saveComment(CommentDTO commentDTO) {
 
         //Extracting the user using user Id
-        User user = userRepository.getUserByUsername(commentDTO.getUserId())
-                .orElseThrow(() -> new UsernameNotFoundException("User not found for user id : "+ commentDTO.getUserId()));
+        User user = userRepository.getUserByUsername(commentDTO.getUsername())
+                .orElseThrow(() -> new UsernameNotFoundException("User not found for user id : "+ commentDTO.getUsername()));
 
         //Passing our built comment to comment repository for saving
-        commentRepository.saveComment(commentDTO.getCommentContent(), commentDTO.getBlogId(), commentDTO.getUserId(), LocalDate.now());
+        commentRepository.saveComment(commentDTO.getCommentContent(), commentDTO.getBlogId(), commentDTO.getUsername(), LocalDate.now());
     }
 
     @Override

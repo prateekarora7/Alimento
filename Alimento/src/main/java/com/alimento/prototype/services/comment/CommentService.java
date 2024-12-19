@@ -13,11 +13,11 @@ public interface CommentService {
 
     List<Comment> getCommentsByBlogIdAndUsername(int blogId, String username);
 
-    void deleteComment(long commentId);
-
     List<Comment> getCommentsByUserId(String userId);
 
     List<Comment> getCommentsByBlogId(int blogId);
+
+    void deleteComment(long commentId);
 
     Comment updateComment(long commentId, String commentContent);
 }

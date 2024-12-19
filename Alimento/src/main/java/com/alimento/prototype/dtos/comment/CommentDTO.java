@@ -1,7 +1,9 @@
 package com.alimento.prototype.dtos.comment;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
+@AllArgsConstructor
 @Data
 public class CommentDTO {
 
@@ -9,6 +11,6 @@ public class CommentDTO {
 
     private int blogId;
 
-    private String userId;
+    private String username;
 
 }
