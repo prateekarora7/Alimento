@@ -60,7 +60,7 @@ public class CommentServiceImpl implements CommentService {
 
         //Throwing run time exception if resource deletion was not succesful
         if(!(commentRepository.getCommentByCommentId(commentId) == null)){
-            throw new RuntimeException("Resource deletion was unseccesful");
+            throw new RuntimeException("Resource deletion was unsuccesful");
         }
     }
 
