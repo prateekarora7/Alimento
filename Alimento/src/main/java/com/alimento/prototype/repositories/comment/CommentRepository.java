@@ -17,30 +17,32 @@ public interface CommentRepository extends JpaRepository<Comment, Integer> {
     //Abstract method to save a newly posted comment
     @Transactional
     @Modifying
-    @Query(value = "INSERT INTO comment (comment_content, blog_id, user_id, comment_date) VALUES (:commentContent, :blogId, :userId, :commentDate)", nativeQuery = true)
-    void saveComment(@Param("commentContent") String commentContent, @Param("blogId") int blogId, @Param("userId") String userId, @Param("commentDate") LocalDate commentDate);
+    @Query(value = "INSERT INTO comment (comment_content, blog_id, username, comment_date) VALUES (:commentContent, :blogId, :username, :commentDate)", nativeQuery = true)
+    void saveComment(@Param("commentContent") String commentContent, @Param("blogId") long blogId, @Param("username") String username, @Param("commentDate") LocalDate commentDate);
 
     //Method to get comment by Comment Id
     @Query(value = "SELECT * FROM comment WHERE comment_id = :commentId", nativeQuery = true)
     Comment getCommentByCommentId(@Param("commentId") long commentId);
 
-    //Method to get List of comments by User Id or comments done by an user
+    //Method to get List of comments by Username or comments done by an user
     @Query(value = "SELECT * FROM comment WHERE username = :username", nativeQuery = true)
     List<Comment> getCommentsByUsername(@Param("username") String username);
 
     //Method to get list of comments by blog Id or comments on an blog
     @Query(value = "SELECT * FROM comment WHERE blog_id = :blogId", nativeQuery = true)
-    List<Comment> getCommentsByBlogId(@Param("blogId") int blogId);
+    List<Comment> getCommentsByBlogId(@Param("blogId") long blogId);
 
     //Method to get list of comments by blogId and Username
     @Query(value = "SELECT * FROM comment WHERE blog_id = :blogId AND username = :username", nativeQuery = true)
     List<Comment> getCommentsByBlogIdAndUsername(@Param("blogId") int blogId, @Param("username") String username);
 
     //Method to delete the comment using comment id
+    @Modifying
     @Query(value = "DELETE FROM comment WHERE id = :commentId", nativeQuery = true)
     void deleteComment(@Param("commentId") long commentId);
 
     //Method to update comment
+    @Modifying
     @Query(value = "UPDATE comment SET comment_content = :commentContent WHERE comment_id = :commentId", nativeQuery = true)
     void updateComment(@Param("commentId") long commentId, @Param("commentContent") String commentContent);
 }

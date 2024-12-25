@@ -26,12 +26,12 @@ public class Comment {
     private String commentContent;
 
     @ManyToOne
-    @JoinColumn(name = "blogId", nullable = false)
+    @JoinColumn(name = "blogId")
     @JsonBackReference("blog-comment")
     private BlogPost blogPost;
 
     @ManyToOne
-    @JoinColumn(name = "username", nullable = false)
+    @JoinColumn(name = "username")
     @JsonBackReference("user-comments")
     private User user;
 
