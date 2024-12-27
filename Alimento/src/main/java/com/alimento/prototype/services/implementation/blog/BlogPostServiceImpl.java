@@ -7,6 +7,7 @@ import com.alimento.prototype.repositories.blog.ContentBlockRepository;
 import com.alimento.prototype.services.blog.BlogPostService;
 import com.alimento.prototype.utils.SlugUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -18,11 +19,10 @@ public class BlogPostServiceImpl implements BlogPostService {
     private final BlogPostRepository blogPostRepository;
 
     @Autowired
-    private final SlugUtil slugUtil;
+    private SlugUtil slugUtil;
 
-    public BlogPostServiceImpl(BlogPostRepository blogPostRepository, ContentBlockRepository contentBlockRepository, SlugUtil slugUtil) {
+    public BlogPostServiceImpl(BlogPostRepository blogPostRepository) {
         this.blogPostRepository = blogPostRepository;
-        this.slugUtil = slugUtil;
     }
 
     @Override

@@ -29,6 +29,16 @@ public interface BlogPostRepository extends JpaRepository<BlogPost, Long> {
     @Query(value = "SELECT * FROM blog_post WHERE slug = :slug", nativeQuery = true)
     BlogPost getBlogPostBySlug(@Param("slug") String slug);
 
+    //List<BlogPost> getBlogPostsByTag(@Param("slug") String slug); // filters using single tag
+
+    //List<BlogPost> getBlogPostsByTags(@Param("slug") String slug); // Filters using multiple tags
+
+    BlogPost updateBlogPostBySlug(String oldSlug, String newSlug);
+
+    void deleteBlogBySlug(String slug);
+
+
+
     @Query(value = "SELECT CASE WHEN COUNT(*) > 0 THEN TRUE ELSE FALSE END " +
             "FROM blog_post WHERE slug = :slug", nativeQuery = true)
     Integer existsBySlug(@Param("slug") String slug);

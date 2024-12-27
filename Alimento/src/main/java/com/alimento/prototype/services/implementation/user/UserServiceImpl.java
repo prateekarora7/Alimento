@@ -38,18 +38,67 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getUserByUsername(String username) {
+        User user = userRepository.getUserByUsername(username).orElseThrow(()->new UsernameNotFoundException("Invalid username. Username " + username + "does not exist"));
+        return user;
+    }
+
+    @Override
     public User getUserByEmail(String email) {
 
         User user = userRepository.getUserByEmail(email).orElseThrow(()->new EmailNotFoundException("Invalid user email. User with this email does not exist"));
         return user;
-        
+
     }
 
     @Override
-    public User getUserByUsername(String username) {
-        User user = userRepository.getUserByUsername(username).orElseThrow(()->new UsernameNotFoundException("Invalid username. User with this username does not exist"));
-        return user;
+    public void updateUsername(String oldUsername, String newUsername) {
+        boolean usernameExists = userRepository.getUserByUsername(newUsername).isPresent();
+        if(!usernameExists) userRepository.updateUsername(oldUsername, newUsername);
+        else{
+            throw new UsernameAlreadyExistsException(newUsername+" is not available");
+        }
     }
 
+    @Override
+    public void updatePhoneNumber(String username, String newPhoneNumber) {
+        //No implementation for this method as we need OTP verification for this
+    }
+
+    @Override
+    public void updateName(String username, String firstName, String lastName) {
+        boolean usernameExists = userRepository.getUserByUsername(username).isPresent();
+        if(usernameExists) userRepository.updateName(username, firstName, lastName);
+        else{
+            throw new UsernameNotFoundException(username + " does not exist");
+        }
+    }
+
+    @Override
+    public void updatePassword(String username, String newPassword) {
+        boolean usernameExists = userRepository.getUserByUsername(username).isPresent();
+        if(usernameExists) userRepository.updatePassword(username, newPassword);
+        else{
+            throw new UsernameNotFoundException(username + " does not exist");
+        }
+    }
+
+    @Override
+    public void deleteUserByUsername(String username) {
+        boolean usernameExists = userRepository.getUserByUsername(username).isPresent();
+        if(usernameExists) userRepository.deleteUserByUsername(username);
+        else{
+            throw new UsernameNotFoundException(username + " does not exist");
+        }
+    }
+
+    @Override
+    public void deleteUserByEmail(String email) {
+        boolean emailExists = userRepository.getUserByEmail(email).isPresent();
+        if(emailExists) userRepository.deleteUserByUsername(email);
+        else{
+            throw new UsernameNotFoundException(email + " does not exist");
+        }
+    }
 
 }

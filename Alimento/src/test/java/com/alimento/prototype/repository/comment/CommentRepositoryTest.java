@@ -8,6 +8,7 @@ import com.alimento.prototype.entities.user.User;
 import com.alimento.prototype.repositories.blog.BlogPostRepository;
 import com.alimento.prototype.repositories.comment.CommentRepository;
 import com.alimento.prototype.repositories.user.UserRepository;
+import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,10 +29,13 @@ import static com.alimento.prototype.entities.blogs.BlockType.TEXT;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 @DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-//@ActiveProfiles("test")
+//@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@ActiveProfiles("test")
 @Transactional
 public class CommentRepositoryTest {
+
+    @Autowired
+    private EntityManager entityManager;
 
     @Autowired
     BlogPostRepository blogPostRepository;
@@ -65,6 +69,11 @@ public class CommentRepositoryTest {
         //System.out.println(userRepository.getUserByUsernameForTest("testUser").get);
         this.user = userRepository.getUserByUsernameForTest("testUser");
     }
+
+//    @BeforeEach
+//    public void enableForeignKeys() {
+//        entityManager.createNativeQuery("PRAGMA foreign_keys = ON").executeUpdate();
+//    }
 
     @Test
     public void testSaveComment_success() {
