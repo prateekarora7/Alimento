@@ -1,13 +1,11 @@
 package com.alimento.prototype.services.implementation.blog;
 
 import com.alimento.prototype.dtos.blog.BlogPostDTO;
-import com.alimento.prototype.entities.blogs.BlogPost;
+import com.alimento.prototype.entities.blog.BlogPost;
 import com.alimento.prototype.repositories.blog.BlogPostRepository;
-import com.alimento.prototype.repositories.blog.ContentBlockRepository;
 import com.alimento.prototype.services.blog.BlogPostService;
 import com.alimento.prototype.utils.SlugUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -28,8 +26,6 @@ public class BlogPostServiceImpl implements BlogPostService {
     @Override
     public void saveBlogPostDTO(BlogPostDTO blogPostDTO) {
 
-        String formattedTags = String.join(", ", blogPostDTO.getTags());
-
         String formattedSlug = slugUtil.toSlug(blogPostDTO.getSlug());
 
 
@@ -39,7 +35,7 @@ public class BlogPostServiceImpl implements BlogPostService {
                 .authorName(blogPostDTO.getAuthorName())
                 .slug(formattedSlug)
                 .createdAt(LocalDateTime.now())
-                .tags(formattedTags)
+                .tags(blogPostDTO.getTags())
                 .blocks(blogPostDTO.getContentBlocks())
                 .build();
 

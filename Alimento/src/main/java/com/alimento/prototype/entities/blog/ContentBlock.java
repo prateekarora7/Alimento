@@ -1,4 +1,4 @@
-package com.alimento.prototype.entities.blogs;
+package com.alimento.prototype.entities.blog;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

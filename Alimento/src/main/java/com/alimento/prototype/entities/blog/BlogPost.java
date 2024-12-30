@@ -1,18 +1,24 @@
-package com.alimento.prototype.entities.blogs;
+package com.alimento.prototype.entities.blog;
 
 import com.alimento.prototype.entities.comment.Comment;
+import com.alimento.prototype.entities.tag.Tag;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "blog_post")
+@Table(name = "blog_post", indexes = {
+        @Index(name = "idx_blog_tag", columnList = "blogId"),
+})
 public class BlogPost {
 
     @Id
@@ -44,7 +50,12 @@ public class BlogPost {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @Column(name = "tags")
-    private String tags;
+    @ManyToMany
+    @JoinTable(
+            name = "blog_tags",
+            joinColumns = @JoinColumn(name = "blog_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id")
+    )
+    private Set<Tag> tags = new HashSet<>();
 
 }

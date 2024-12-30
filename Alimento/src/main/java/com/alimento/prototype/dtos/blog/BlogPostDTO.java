@@ -1,10 +1,12 @@
 package com.alimento.prototype.dtos.blog;
 
-import com.alimento.prototype.entities.blogs.ContentBlock;
+import com.alimento.prototype.entities.blog.ContentBlock;
+import com.alimento.prototype.entities.tag.Tag;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Data
 public class BlogPostDTO {
@@ -19,7 +21,7 @@ public class BlogPostDTO {
 
     private LocalDateTime createdAt;
 
-    private List<String> tags;
+    private Set<Tag> tags;
 
     private List<ContentBlock> contentBlocks;
 

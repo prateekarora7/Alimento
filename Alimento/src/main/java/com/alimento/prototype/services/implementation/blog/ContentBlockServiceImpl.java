@@ -1,6 +1,6 @@
 package com.alimento.prototype.services.implementation.blog;
 
-import com.alimento.prototype.entities.blogs.ContentBlock;
+import com.alimento.prototype.entities.blog.ContentBlock;
 import com.alimento.prototype.repositories.blog.ContentBlockRepository;
 import com.alimento.prototype.services.blog.ContentBlockService;
 import org.springframework.stereotype.Service;

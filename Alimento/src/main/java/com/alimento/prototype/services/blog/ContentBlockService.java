@@ -1,6 +1,6 @@
 package com.alimento.prototype.services.blog;
 
-import com.alimento.prototype.entities.blogs.ContentBlock;
+import com.alimento.prototype.entities.blog.ContentBlock;
 
 import java.util.List;
 

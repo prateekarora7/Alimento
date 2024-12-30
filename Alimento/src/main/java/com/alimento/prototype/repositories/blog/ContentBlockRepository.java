@@ -1,7 +1,7 @@
 package com.alimento.prototype.repositories.blog;
 
-import com.alimento.prototype.entities.blogs.BlockType;
-import com.alimento.prototype.entities.blogs.ContentBlock;
+import com.alimento.prototype.entities.blog.BlockType;
+import com.alimento.prototype.entities.blog.ContentBlock;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

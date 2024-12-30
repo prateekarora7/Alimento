@@ -1,7 +1,7 @@
 package com.alimento.prototype.controllers.blog;
 
 import com.alimento.prototype.dtos.blog.BlogPostDTO;
-import com.alimento.prototype.entities.blogs.BlogPost;
+import com.alimento.prototype.entities.blog.BlogPost;
 import com.alimento.prototype.services.blog.BlogPostService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,8 +1,7 @@
 package com.alimento.prototype.repository.comment;
 
-import com.alimento.prototype.entities.blogs.BlockType;
-import com.alimento.prototype.entities.blogs.BlogPost;
-import com.alimento.prototype.entities.blogs.ContentBlock;
+import com.alimento.prototype.entities.blog.BlogPost;
+import com.alimento.prototype.entities.blog.ContentBlock;
 import com.alimento.prototype.entities.comment.Comment;
 import com.alimento.prototype.entities.user.User;
 import com.alimento.prototype.repositories.blog.BlogPostRepository;
@@ -12,20 +11,14 @@ import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-import static com.alimento.prototype.entities.blogs.BlockType.TEXT;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 @DataJpaTest

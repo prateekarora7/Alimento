@@ -7,9 +7,12 @@ import com.alimento.prototype.exceptions.UsernameAlreadyExistsException;
 import com.alimento.prototype.exceptions.UsernameNotFoundException;
 import com.alimento.prototype.repositories.user.UserRepository;
 import com.alimento.prototype.services.user.UserService;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -51,6 +54,10 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    public List<User> getUsersByCreationDate(@Param("date") LocalDate date){
+        return userRepository.getUsersByCreationDate(date);
+    }
+
     @Override
     public void updateUsername(String oldUsername, String newUsername) {
         boolean usernameExists = userRepository.getUserByUsername(newUsername).isPresent();
@@ -75,7 +82,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updatePassword(String username, String newPassword) {
+    public void updatePassword(String username, String oldPassword, String newPassword) {
         boolean usernameExists = userRepository.getUserByUsername(username).isPresent();
         if(usernameExists) userRepository.updatePassword(username, newPassword);
         else{
@@ -95,9 +102,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUserByEmail(String email) {
         boolean emailExists = userRepository.getUserByEmail(email).isPresent();
-        if(emailExists) userRepository.deleteUserByUsername(email);
+        if(emailExists) userRepository.deleteUserByEmail(email);
         else{
-            throw new UsernameNotFoundException(email + " does not exist");
+            throw new EmailNotFoundException(email + " does not exist");
         }
     }
 

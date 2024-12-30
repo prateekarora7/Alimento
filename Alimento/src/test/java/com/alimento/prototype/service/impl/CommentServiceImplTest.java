@@ -1,7 +1,7 @@
 package com.alimento.prototype.service.impl;
 
 import com.alimento.prototype.dtos.comment.CommentDTO;
-import com.alimento.prototype.entities.blogs.BlogPost;
+import com.alimento.prototype.entities.blog.BlogPost;
 import com.alimento.prototype.entities.comment.Comment;
 import com.alimento.prototype.entities.user.User;
 import com.alimento.prototype.exceptions.NoCommentsFoundException;
