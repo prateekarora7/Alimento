@@ -1,6 +1,5 @@
 package com.alimento.prototype.repositories.blog;
 
-import com.alimento.prototype.entities.blog.BlockType;
 import com.alimento.prototype.entities.blog.ContentBlock;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,9 +13,11 @@ public interface ContentBlockRepository extends JpaRepository<ContentBlock, Long
 
     @Transactional
     @Modifying
-    @Query(value = "INSERT INTO content_block (block_type, blog_id, block_order, content, url)" +
-            "VALUES (:blockType, :blogId, :blockOrder, :content, :url)", nativeQuery = true)
-    void saveContentBlock(@Param("blockType") BlockType blockType, @Param("blogId") long blogId, @Param("blockOrder") int blockOrder, @Param("content") String content, @Param("url") String url);
+    @Query(value = "INSERT INTO content_block (block_type, slug, block_order, content, url)" +
+            "VALUES (:blockType, :slug, :blockOrder, :content, :url)", nativeQuery = true)
+    void saveContentBlock(@Param("blockType") String blockType, @Param("slug") String slug, @Param("blockOrder") int blockOrder, @Param("content") String content, @Param("url") String url);
+
+
 
 
 

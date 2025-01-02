@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Repository
@@ -16,9 +17,9 @@ public interface BlogPostRepository extends JpaRepository<BlogPost, Long> {
 
     @Modifying
     @Transactional
-    @Query(value = "INSERT INTO blog_post (title, author_name, created_at, tags) " +
-            "VALUES (:title, :authorName, :createdAt, :tags)", nativeQuery = true)
-    void saveBlogPostDTO(@Param("title") String title, @Param("authorName") String authorName, @Param("createdAt") LocalDateTime createdAt, @Param("tags") String tags);
+    @Query(value = "INSERT INTO blog_post (title, author_name, created_at, slug) " +
+            "VALUES (:title, :authorName, :createdAt, :slug)", nativeQuery = true)
+    void saveBlogPostSkeleton(@Param("title") String title, @Param("authorName") String authorName, @Param("createdAt") LocalDateTime createdAt, @Param("slug") String slug);
 
 
     @Query(value = "SELECT * FROM blog_post WHERE blog_id = :blogId", nativeQuery = true)
@@ -26,6 +27,11 @@ public interface BlogPostRepository extends JpaRepository<BlogPost, Long> {
 
     @Query(value = "SELECT * FROM blog_post WHERE slug = :slug", nativeQuery = true)
     BlogPost getBlogPostBySlug(@Param("slug") String slug);
+
+    @Query(value = "SELECT slug FROM blog_post WHERE slug LIKE :slug", nativeQuery = true)
+    List<String> matchingBaseSlugs(String slug);
+//    @Query(value = "INSERT INTO blog_post WHERE slug = :slug ")
+//    void saveContentBLocksToBlogPost();
 
     //List<BlogPost> getBlogPostsByTag(@Param("slug") String slug); // filters using single tag
 

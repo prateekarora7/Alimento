@@ -37,11 +37,13 @@ public interface CommentRepository extends JpaRepository<Comment, Integer> {
     List<Comment> getCommentsByBlogIdAndUsername(@Param("blogId") int blogId, @Param("username") String username);
 
     //Method to delete the comment using comment id
+    @Transactional
     @Modifying
     @Query(value = "DELETE FROM comment WHERE id = :commentId", nativeQuery = true)
     void deleteComment(@Param("commentId") long commentId);
 
     //Method to update comment
+    @Transactional
     @Modifying
     @Query(value = "UPDATE comment SET comment_content = :commentContent WHERE comment_id = :commentId", nativeQuery = true)
     void updateComment(@Param("commentId") long commentId, @Param("commentContent") String commentContent);

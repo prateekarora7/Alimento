@@ -2,12 +2,14 @@ package com.alimento.prototype.entities.blog;
 
 import com.alimento.prototype.entities.comment.Comment;
 import com.alimento.prototype.entities.tag.Tag;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -36,8 +38,8 @@ public class BlogPost {
     @Column(name = "author_name")
     private String authorName;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "blog_id")
+    @OneToMany(mappedBy = "blogPost", cascade = CascadeType.ALL)
+    @JsonManagedReference("blog-block")
     private List<ContentBlock> blocks;
 
     @OneToMany(mappedBy = "blogPost", cascade = CascadeType.ALL)

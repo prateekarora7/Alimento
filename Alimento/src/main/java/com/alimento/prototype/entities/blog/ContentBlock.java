@@ -1,5 +1,6 @@
 package com.alimento.prototype.entities.blog;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,7 +15,7 @@ public class ContentBlock {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long blockId;
 
     @Column(name = "block_type")
     @Enumerated(EnumType.STRING)
@@ -26,7 +27,13 @@ public class ContentBlock {
     @Column(columnDefinition = "TEXT")
     private String content; // Text content or embed code
 
+    @Column(name = "url")
     private String url; // For images or external embeds
+
+    @ManyToOne
+    @JoinColumn(name = "slug", referencedColumnName = "slug")
+    @JsonBackReference("blog-block")
+    private BlogPost blogPost;
 
 }
 

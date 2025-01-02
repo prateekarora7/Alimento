@@ -1,6 +1,6 @@
 package com.alimento.prototype.controllers.blog;
 
-import com.alimento.prototype.dtos.blog.BlogPostDTO;
+import com.alimento.prototype.dtos.blog.BlogPostRequest;
 import com.alimento.prototype.entities.blog.BlogPost;
 import com.alimento.prototype.services.blog.BlogPostService;
 import org.springframework.http.HttpStatus;
@@ -18,10 +18,10 @@ public class BlogPostController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity saveBlogPostDTO(@RequestBody BlogPostDTO blogPostDTO){
+    public ResponseEntity saveBlogPostDTO(@RequestBody BlogPostRequest blogPostRequest){
 
         //saving the auto generated blog Id in a variable
-        blogPostService.saveBlogPostDTO(blogPostDTO);
+        blogPostService.saveBlogPostDTO(blogPostRequest);
 
         // returning the blogId with the response entity
         return new ResponseEntity(HttpStatus.CREATED);

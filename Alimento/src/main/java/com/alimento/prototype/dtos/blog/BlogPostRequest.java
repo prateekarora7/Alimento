@@ -6,10 +6,9 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 
 @Data
-public class BlogPostDTO {
+public class BlogPostRequest {
 
     // ***This blog post dto is only to save a basic structure for blog first and then we can add the content blocks associated with it***
 
@@ -21,8 +20,6 @@ public class BlogPostDTO {
 
     private LocalDateTime createdAt;
 
-    private Set<Tag> tags;
-
-    private List<ContentBlock> contentBlocks;
+    private List<ContentBlockRequest> contentBlockList;
 
 }
