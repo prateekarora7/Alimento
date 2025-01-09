@@ -1,6 +1,7 @@
 package com.alimento.prototype.repositories.blog;
 
 import com.alimento.prototype.entities.blog.BlogPost;
+import com.alimento.prototype.entities.blog.Tag;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -21,6 +22,11 @@ public interface BlogPostRepository extends JpaRepository<BlogPost, Long> {
             "VALUES (:title, :authorName, :createdAt, :slug)", nativeQuery = true)
     void saveBlogPostSkeleton(@Param("title") String title, @Param("authorName") String authorName, @Param("createdAt") LocalDateTime createdAt, @Param("slug") String slug);
 
+    @Modifying
+    @Transactional
+    @Query(value = "INSERT INTO blog_post (tags) VALUES (:tags)", nativeQuery = true)
+    void saveTags(@Param("tags") List<Tag> tags);
+
 
     @Query(value = "SELECT * FROM blog_post WHERE blog_id = :blogId", nativeQuery = true)
     BlogPost getBlogPostByBlogId(@Param("blogId") long blogId);
@@ -30,6 +36,9 @@ public interface BlogPostRepository extends JpaRepository<BlogPost, Long> {
 
     @Query(value = "SELECT slug FROM blog_post WHERE slug LIKE :slug", nativeQuery = true)
     List<String> matchingBaseSlugs(String slug);
+
+//    @Query(value = "INSERT INTO blog_post (")
+//    void saveTags(Tag tag);
 //    @Query(value = "INSERT INTO blog_post WHERE slug = :slug ")
 //    void saveContentBLocksToBlogPost();
 

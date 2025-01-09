@@ -1,26 +1,19 @@
 package com.alimento.prototype.entities.blog;
 
 import com.alimento.prototype.entities.comment.Comment;
-import com.alimento.prototype.entities.tag.Tag;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "blog_post", indexes = {
-        @Index(name = "idx_blog_tag", columnList = "blogId"),
-})
+@Table(name = "blog_post")
 public class BlogPost {
 
     @Id
@@ -28,7 +21,7 @@ public class BlogPost {
     @Column(name = "blog_id")
     private long blogId;
 
-    @Column(name = "slug", unique = true)
+    @Column(name = "slug", unique = true, nullable = false)
     private String slug;
 
     @NonNull
@@ -38,7 +31,8 @@ public class BlogPost {
     @Column(name = "author_name")
     private String authorName;
 
-    @OneToMany(mappedBy = "blogPost", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "slug", referencedColumnName = "slug")
     @JsonManagedReference("blog-block")
     private List<ContentBlock> blocks;
 
@@ -52,12 +46,16 @@ public class BlogPost {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "blog_tags",
-            joinColumns = @JoinColumn(name = "blog_id"),
-            inverseJoinColumns = @JoinColumn(name = "tag_id")
+            joinColumns = @JoinColumn(name = "slug", referencedColumnName = "slug"),
+            inverseJoinColumns = @JoinColumn(name = "tag_name", referencedColumnName = "tag_name"),
+            indexes = {
+                    @Index(name = "idx_blog_tags_tag_name", columnList = "tag_name"),
+                    @Index(name = "idx_blog_tags_slug", columnList = "slug")
+            }
     )
-    private Set<Tag> tags = new HashSet<>();
+    private Set<Tag> tags;
 
 }
